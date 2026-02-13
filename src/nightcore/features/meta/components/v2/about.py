@@ -19,7 +19,7 @@ from discord.ui import (
 from src.nightcore.utils import discord_ts
 
 if TYPE_CHECKING:
-    from src.nightcore.bot import NightcoreGlendaleTools
+    from src.nightcore.bot import NightcoreTools
 
 
 class AboutActionRow(ActionRow["AboutViewV2"]):
@@ -39,7 +39,7 @@ class AboutActionRow(ActionRow["AboutViewV2"]):
 class AboutViewV2(LayoutView):
     def __init__(
         self,
-        bot: NightcoreGlendaleTools,
+        bot: NightcoreTools,
         created_at: datetime,
         memory_usage: str,
         uptime: str,

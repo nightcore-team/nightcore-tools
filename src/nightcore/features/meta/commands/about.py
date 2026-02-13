@@ -12,7 +12,7 @@ from discord.ext.commands import Cog  # type: ignore
 from discord.utils import snowflake_time
 
 if TYPE_CHECKING:
-    from src.nightcore.bot import NightcoreGlendaleTools
+    from src.nightcore.bot import NightcoreTools
 
 from src.nightcore.features.meta.components.v2.about import AboutViewV2
 
@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 
 class About(Cog):
-    def __init__(self, bot: "NightcoreGlendaleTools"):
+    def __init__(self, bot: "NightcoreTools"):
         self.bot = bot
 
     @app_commands.command(
@@ -29,7 +29,7 @@ class About(Cog):
     )
     async def about(
         self,
-        interaction: discord.Interaction["NightcoreGlendaleTools"],
+        interaction: discord.Interaction["NightcoreTools"],
         ephemeral: bool = True,
     ):
         """Display information about the bot."""
@@ -64,6 +64,6 @@ class About(Cog):
         )
 
 
-async def setup(bot: "NightcoreGlendaleTools"):
+async def setup(bot: "NightcoreTools"):
     """Setup the About cog."""
     await bot.add_cog(About(bot))

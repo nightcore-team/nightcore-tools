@@ -1,9 +1,9 @@
 """Setup module for creating and configuring the Nightcore bot instance."""
 
-from src.nightcore.bot import NightcoreGlendaleTools
+from src.nightcore.bot import NightcoreTools
 
 
-def create_bot() -> NightcoreGlendaleTools:
+def create_bot() -> NightcoreTools:
     """Create and return an instance of the Nightcore bot."""
 
     cog_modules: list[str] = [
@@ -11,6 +11,6 @@ def create_bot() -> NightcoreGlendaleTools:
         "src.nightcore.features.meta.commands.ping",
     ]
 
-    return NightcoreGlendaleTools(
+    return NightcoreTools(
         cog_modules=cog_modules,
     )

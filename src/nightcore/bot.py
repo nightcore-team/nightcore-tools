@@ -35,7 +35,7 @@ class GuildOnlyTree(app_commands.CommandTree):
         return True
 
 
-class NightcoreGlendaleTools(Bot):
+class NightcoreTools(Bot):
     def __init__(
         self,
         *,

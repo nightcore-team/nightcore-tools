@@ -7,11 +7,11 @@ from discord.ext.commands import Cog  # type: ignore
 from discord.interactions import Interaction
 
 if TYPE_CHECKING:
-    from src.nightcore.bot import NightcoreGlendaleTools
+    from src.nightcore.bot import NightcoreTools
 
 
 class Ping(Cog):
-    def __init__(self, bot: "NightcoreGlendaleTools") -> None:
+    def __init__(self, bot: "NightcoreTools") -> None:
         self.bot = bot
 
     @app_commands.command(name="ping", description="Посмотреть задержку бота")
@@ -23,6 +23,6 @@ class Ping(Cog):
         )
 
 
-async def setup(bot: "NightcoreGlendaleTools"):
+async def setup(bot: "NightcoreTools"):
     """Setup the Ping cog."""
     await bot.add_cog(Ping(bot))
