@@ -79,6 +79,13 @@ class GA(Cog):
                 ephemeral=True,
             )
 
+        # check for needed permissions
+        if not guild.me.guild_permissions.manage_channels:
+            return await interaction.response.send_message(
+                "У бота нет прав для управления каналами.",
+                ephemeral=True,
+            )
+
         # check if channel exists
         channel = guild.get_channel(CHIEF_ADMINISTRATOR_CHANNEL_ID)
         if not channel:
