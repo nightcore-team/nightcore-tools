@@ -9,6 +9,7 @@ def create_bot() -> NightcoreTools:
     cog_modules: list[str] = [
         "src.nightcore.features.meta.commands.about",
         "src.nightcore.features.meta.commands.ping",
+        "src.nightcore.features.ga.commands.ga",
     ]
 
     return NightcoreTools(
