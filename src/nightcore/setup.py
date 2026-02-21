@@ -7,9 +7,12 @@ def create_bot() -> NightcoreTools:
     """Create and return an instance of the Nightcore bot."""
 
     cog_modules: list[str] = [
+        # commands
         "src.nightcore.features.meta.commands.about",
         "src.nightcore.features.meta.commands.ping",
         "src.nightcore.features.ga.commands.ga",
+        # events
+        "src.nightcore.events.error",
     ]
 
     return NightcoreTools(
