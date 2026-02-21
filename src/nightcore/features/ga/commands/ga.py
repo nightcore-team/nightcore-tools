@@ -1,5 +1,6 @@
 """Command to change status of Chief Administrator channel."""
 
+import logging
 from typing import TYPE_CHECKING, cast
 
 from discord import (
@@ -23,6 +24,8 @@ from src.nightcore.features.ga.constants import (
     CHIEF_ADMINISTRATOR_CHANNEL_NAME,
     CHIEF_ADMINISTRATOR_ID,
 )
+
+logger = logging.getLogger(__name__)
 
 
 class GA(Cog):
@@ -124,6 +127,12 @@ class GA(Cog):
             await interaction.response.send_message(
                 "Канал открыт.", ephemeral=True
             )
+
+        logger.info(
+            "[command] - invoked user=%s guild=%s",
+            interaction.user.id,
+            cast(Guild, interaction.guild).id,
+        )
 
 
 async def setup(bot: "NightcoreTools"):
