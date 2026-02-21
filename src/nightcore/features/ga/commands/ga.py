@@ -44,7 +44,9 @@ class GA(Cog):
         """Close the channel."""
         overwrites = channel.overwrites.copy()
         for role in administrator_roles:
-            overwrites[role] = PermissionOverwrite(connect=False)
+            overwrites[role] = PermissionOverwrite(
+                view_channel=True, connect=False
+            )
 
         new_name = (
             f"{self.CLOSE_EMOJI}{self.SEPARATOR}"
@@ -60,7 +62,9 @@ class GA(Cog):
         """Open the channel."""
         overwrites = channel.overwrites.copy()
         for role in administrator_roles:
-            overwrites[role] = PermissionOverwrite(connect=True)
+            overwrites[role] = PermissionOverwrite(
+                view_channel=True, connect=True, stream=True
+            )
 
         new_name = (
             f"{self.OPEN_EMOJI}{self.SEPARATOR}"
