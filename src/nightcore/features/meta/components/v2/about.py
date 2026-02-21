@@ -30,7 +30,7 @@ class AboutActionRow(ActionRow["AboutViewV2"]):
             Button["AboutViewV2"](
                 style=ButtonStyle.link,
                 label="Nightcore Community",
-                emoji="<:shootingstar:1437888733990097057>",
+                emoji="<:nightcorespring:1474751361408307291>",
                 url="https://discord.gg/sSZs2sWhUZ",
             )
         )
@@ -46,12 +46,12 @@ class AboutViewV2(LayoutView):
     ) -> None:
         super().__init__(timeout=None)
 
-        container = Container[Self](accent_color=Color.from_str("#515cff"))
+        container = Container[Self](accent_color=Color.from_str("#fdcdc9"))
 
         container.add_item(
             # Section[Self](
             TextDisplay[Self](
-                "## <:star1:1442917476139667607> Nightcore\n\n"
+                "## <:nightcorespring:1474751361408307291> Nightcore\n\n"
                 # "**Разработчик: <@566255833684508672>**\n"
                 "> *Born from the rhythm of the night, crafted in the pulse of the stars.*"  # noqa: E501
             ),
@@ -65,7 +65,7 @@ class AboutViewV2(LayoutView):
 
         container.add_item(
             TextDisplay[Self](
-                "## <:shootingstar:1442917307746619422> Информация о боте\n\n"
+                "## <:star:1474751776430489851> Информация о боте\n\n"
                 f"> **Бот ID**: `{bot.user.id}`\n"  # type: ignore
                 f"> **Задержка**: `{bot.latency * 1000:.2f} ms`\n"
                 f"> **Дата создания: {discord_ts(created_at)}**\n"
@@ -75,7 +75,7 @@ class AboutViewV2(LayoutView):
         container.add_item(Separator[Self]())
         container.add_item(
             TextDisplay[Self](
-                "## <:code:1442916730165788876> Техническая информация\n\n"
+                "## <:code:1474752114071961651> Техническая информация\n\n"
                 f"> **Потребление памяти: `{memory_usage}`**\n"
                 f"> **Библиотека: `discord.py v{getattr(discord, '__version__', 'unknown')}`**\n"  # noqa: E501
                 f"> **Время работы: {uptime}**\n"
