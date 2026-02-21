@@ -15,6 +15,7 @@ from discord.interactions import Interaction
 if TYPE_CHECKING:
     from src.nightcore.bot import NightcoreTools
 
+from src.config._global import config
 from src.nightcore.features.ga.constants import (
     ADMINISTRATOR_ROLES_IDS,
     CHIEF_ADMINISTRATOR_CHANNEL_DICT,
@@ -73,7 +74,10 @@ class GA(Cog):
         guild = cast(Guild, interaction.guild)
 
         # check if user is GA
-        if interaction.user.id != CHIEF_ADMINISTRATOR_ID:
+        if interaction.user.id not in [
+            CHIEF_ADMINISTRATOR_ID,
+            *config.bot.DEVELOPER_IDS,
+        ]:
             return await interaction.response.send_message(
                 "У вас нет прав для использования этой команды.",
                 ephemeral=True,
