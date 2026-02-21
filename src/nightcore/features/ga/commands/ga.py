@@ -97,6 +97,8 @@ class GA(Cog):
                 ephemeral=True,
             )
 
+        await interaction.response.defer(ephemeral=True, thinking=True)
+
         # check if channel exists
         channel = guild.get_channel(CHIEF_ADMINISTRATOR_CHANNEL_ID)
         if not channel:
@@ -121,16 +123,28 @@ class GA(Cog):
             for role in administrator_roles
         ):
             # close
-            await self.close_channel(channel, administrator_roles)
-            await interaction.response.send_message(
-                "Канал закрыт.", ephemeral=True
-            )
+            try:
+                await self.close_channel(channel, administrator_roles)
+            except Exception as e:
+                logger.error(
+                    "Failed to patch channel (close): %s",
+                    e,
+                    exc_info=True,
+                )
+                await interaction.followup.send("Не удалось закрыть канал.")
+            await interaction.followup.send("Канал закрыт.")
         else:
             # open
-            await self.open_channel(channel, administrator_roles)
-            await interaction.response.send_message(
-                "Канал открыт.", ephemeral=True
-            )
+            try:
+                await self.open_channel(channel, administrator_roles)
+            except Exception as e:
+                logger.error(
+                    "Failed to patch channel (open): %s",
+                    e,
+                    exc_info=True,
+                )
+                await interaction.followup.send("Не удалось открыть канал.")
+            await interaction.followup.send("Канал открыт.")
 
         logger.info(
             "[command] - invoked user=%s guild=%s",
