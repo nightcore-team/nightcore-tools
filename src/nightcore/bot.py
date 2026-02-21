@@ -168,5 +168,7 @@ class NightcoreTools(Bot):
     async def on_ready(self):
         """Event called when the bot is ready."""
         logger.info(f"Loaded cogs: {list(self.cogs.keys())}")
-        logger.info(f"Connected to {len(self.guilds)} guilds")
+        logger.info(
+            f"Connected to {len(self.guilds)} guilds: {[guild.name for guild in self.guilds]}"  # noqa: E501
+        )
         logger.info("🚀 Nightcore Glendale Tools bot started successfully!")
