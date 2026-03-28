@@ -24,7 +24,7 @@ class FormView(LayoutView):
 
         """Build the form view layout."""
 
-        container = Container[Self](accent_color=Color.from_str(""))
+        container = Container[Self]()
 
         container.add_item(
             TextDisplay(
