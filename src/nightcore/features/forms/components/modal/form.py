@@ -6,9 +6,7 @@ from discord import TextStyle
 from discord.ui import Modal, TextInput
 
 
-class FormModal(
-    Modal, title="Анкета на пост заместителя нелегальных организаций"
-):
+class FormModal(Modal, title="Заполнение анкеты"):
     def __init__(self, type: str) -> None:
         super().__init__(custom_id="forms_modal:{type}:sent")
 
