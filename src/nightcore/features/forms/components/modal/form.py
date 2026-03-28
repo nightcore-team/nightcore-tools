@@ -8,11 +8,9 @@ from discord.ui import Modal, TextInput
 
 class FormModal(Modal, title="Заполнение анкеты"):
     def __init__(self, type: str) -> None:
-        super().__init__(custom_id="forms_modal:{type}:sent")
+        super().__init__(custom_id=f"forms_modal:{type}:sent")
 
         """Build the form modal layout."""
-
-        self.type = type
 
     form = TextInput[Self](
         label="Анкета для заполнения",
