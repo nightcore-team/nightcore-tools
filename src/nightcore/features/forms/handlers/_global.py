@@ -1,14 +1,17 @@
 """Global handlers for forms."""
 
+import logging
 from typing import TYPE_CHECKING
 
 from discord.interactions import Interaction
 
 from .button import handle_forms_button, handle_forms_insert_button
-from .form import handle_registration_modal_submit
+from .modal import handle_registration_modal_submit
 
 if TYPE_CHECKING:
     from src.nightcore.bot import NightcoreTools
+
+logger = logging.getLogger(__name__)
 
 
 async def global_forms_handler(
@@ -33,6 +36,7 @@ async def global_forms_handler(
                     return
 
         case "forms_modal":
+            logger.info("Handling modal submit with custom_id: %s", custom_id)
             await handle_registration_modal_submit(interaction, type)
         case _:
             return
