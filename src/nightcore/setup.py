@@ -11,7 +11,9 @@ def create_bot() -> NightcoreTools:
         "src.nightcore.features.meta.commands.about",
         "src.nightcore.features.meta.commands.ping",
         "src.nightcore.features.ga.commands.ga",
+        "src.nightcore.features.forms.commands.formsmessage",
         # events
+        "src.nightcore.events.interaction",
         "src.nightcore.events.error",
     ]
 
