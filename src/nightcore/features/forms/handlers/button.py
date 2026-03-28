@@ -27,6 +27,7 @@ async def handle_forms_button(
                 type=view.type,  # type: ignore
                 status="Одобрено",
                 disable_buttons=True,
+                author_id=view.author_id,  # type: ignore
             )
 
             await interaction.response.edit_message(view=_view)
@@ -38,6 +39,7 @@ async def handle_forms_button(
                 type=view.type,  # type: ignore
                 status="Отклонено",
                 disable_buttons=True,
+                author_id=view.author_id,  # type: ignore
             )
 
             await interaction.response.edit_message(view=_view)

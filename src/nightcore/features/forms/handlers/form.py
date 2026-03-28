@@ -23,4 +23,6 @@ async def handle_registration_modal_submit(
         interaction.data["components"][0]["components"][0]["value"],  # type: ignore
     )
 
-    await interaction.followup.send(view=SentFormView(form, type=type))
+    await interaction.followup.send(
+        view=SentFormView(form, type=type, author_id=interaction.user.id)
+    )

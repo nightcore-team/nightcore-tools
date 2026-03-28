@@ -1,5 +1,6 @@
 """Form V2 view component."""
 
+import logging
 from typing import Self, cast
 
 from discord import ButtonStyle, Color, Interaction, Member
@@ -16,6 +17,8 @@ from src.nightcore.features.forms.constants import FORM_TEXT
 from src.nightcore.features.forms.utils.permissions import (
     check_member_permissions,
 )
+
+logger = logging.getLogger(__name__)
 
 
 class FormView(LayoutView):
@@ -61,6 +64,7 @@ class SentFormView(LayoutView):
         self,
         form_text: str,
         type: str,
+        author_id: int,
         status: str = "На рассмотрении",
         disable_buttons: bool = False,
     ) -> None:
@@ -82,6 +86,7 @@ class SentFormView(LayoutView):
                 "## Анкета на пост заместителя нелегальных организаций"
             )
         )
+        container.add_item(TextDisplay(f"> Автор: <@{author_id}>"))
         container.add_item(Separator())
 
         container.add_item(TextDisplay(f"```{form_text}```"))
@@ -99,7 +104,7 @@ class SentFormView(LayoutView):
                 Button[Self](
                     label="Отклонить",
                     emoji="<:remove:1487439841183535235>",
-                    style=ButtonStyle.danger,
+                    style=ButtonStyle.secondary,
                     custom_id=f"forms:{type}:reject",
                     disabled=disable_buttons,
                 ),
@@ -114,6 +119,12 @@ class SentFormView(LayoutView):
         """Check if the user has permissions to interact with the buttons."""
 
         member = cast(Member, interaction.user)
+        logger.info(
+            "Checking permissions for member %s with type %s",
+            member.id,
+            self.type,
+        )
+        logger.info("Member roles: %s", [role.id for role in member.roles])
 
         if not await check_member_permissions(member, self.type):
             await interaction.response.send_message(

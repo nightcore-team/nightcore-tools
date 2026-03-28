@@ -31,8 +31,8 @@ async def _dispatch_component_interaction(
 
     if custom_id.startswith("forms"):
         await global_forms_handler(interaction, custom_id)
-
-    logger.info("Unhandled component custom_id: %s", custom_id)
+    else:
+        logger.info("Unhandled component custom_id: %s", custom_id)
 
 
 async def setup(bot: "NightcoreTools") -> None:
