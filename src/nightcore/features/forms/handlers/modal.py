@@ -6,7 +6,6 @@ from typing import TYPE_CHECKING, cast
 from discord import Guild
 from discord.interactions import Interaction
 
-from nightcore.utils.object import ensure_member_exists, ensure_role_exists
 from src.nightcore.features.forms.components.view import SentFormView
 from src.nightcore.features.forms.constants import (
     GLOBAL_DEPUTY_ILLEGAL_ROLE_ID,
@@ -16,6 +15,7 @@ from src.nightcore.features.forms.utils.parse import (
     parse_author_id_from_components,
     parse_form_text_from_components,
 )
+from src.nightcore.utils.object import ensure_member_exists, ensure_role_exists
 
 if TYPE_CHECKING:
     from src.nightcore.bot import NightcoreTools

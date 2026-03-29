@@ -58,12 +58,33 @@ GLOBAL_DEPUTY_ILLEGAL_ROLE_ID: Final[int] = 1184189905644032070
 
 ORGANIZATIONS_DICTIONARY: Final[dict[str, list[OrganizationInfo]]] = {
     "ghetto": [
-        OrganizationInfo(name="Grove Street", deputy_role_id=""),
+        OrganizationInfo(
+            name="Grove Street", deputy_role_id="1184189335373885561"
+        ),
+        OrganizationInfo(
+            name="East Side Ballas", deputy_role_id="1184189373814681710"
+        ),
+        OrganizationInfo(name="Rifa", deputy_role_id="1190249006757072937"),
+        OrganizationInfo(name="Aztecas", deputy_role_id="1184189401262194729"),
+        OrganizationInfo(name="Vagos", deputy_role_id="1184189419167682642"),
+        OrganizationInfo(
+            name="Night Wolves", deputy_role_id="1184189452826984458"
+        ),
     ],
     "mafia": [
-        OrganizationInfo(name="La Cosa Nostra", deputy_role_id=""),
-        OrganizationInfo(name="Yakuza", deputy_role_id="456456"),
-        OrganizationInfo(name="Russian Mafia", deputy_role_id="456456"),
+        OrganizationInfo(
+            name="La Cosa Nostra", deputy_role_id="1184189486331080796"
+        ),
+        OrganizationInfo(name="Yakuza", deputy_role_id="1184189537082146856"),
+        OrganizationInfo(
+            name="Warlock MC", deputy_role_id="1184189550453587968"
+        ),
+        OrganizationInfo(
+            name="Russian Mafia", deputy_role_id="1184189503905214675"
+        ),
+        OrganizationInfo(
+            name="Tierra Robada Bikers", deputy_role_id="1184189569009188904"
+        ),
     ],
 }
 
