@@ -6,6 +6,7 @@ from discord import Message
 from discord.interactions import Interaction
 
 from src.nightcore.features.forms.components.modal import (
+    GiveRolesFormModal,
     InsertFormModal,
     RejectFormModal,
 )
@@ -50,6 +51,11 @@ async def handle_forms_button(
 
         case "reject":
             await interaction.response.send_modal(RejectFormModal(type=type))
+
+        case "give_roles":
+            await interaction.response.send_modal(
+                GiveRolesFormModal(type=type)
+            )
 
         case _:
             return

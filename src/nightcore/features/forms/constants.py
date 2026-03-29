@@ -2,6 +2,8 @@
 
 from typing import Final
 
+from .types import OrganizationInfo
+
 FORM_TEXT: Final[str] = """
 Организация / Причина постановки на должность:
 Игровой ник:
@@ -50,6 +52,19 @@ TITLE_DICTIONARY: Final[dict[str, str]] = {
     "ghetto": "Анкета на пост заместителя (Гетто)",
     "business": "Заявка на выдачу бизнеса",
     "territory": "Заявка на выдачу территории",
+}
+
+GLOBAL_DEPUTY_ILLEGAL_ROLE_ID: Final[int] = 1184189905644032070
+
+ORGANIZATIONS_DICTIONARY: Final[dict[str, list[OrganizationInfo]]] = {
+    "ghetto": [
+        OrganizationInfo(name="Grove Street", deputy_role_id=""),
+    ],
+    "mafia": [
+        OrganizationInfo(name="La Cosa Nostra", deputy_role_id=""),
+        OrganizationInfo(name="Yakuza", deputy_role_id="456456"),
+        OrganizationInfo(name="Russian Mafia", deputy_role_id="456456"),
+    ],
 }
 
 MAFIA_ACCESS_ROLES: Final[list[int]] = [

@@ -71,8 +71,33 @@ class SentFormView(LayoutView):
 
         """Build the sent form view layout."""
         accent_color = None
-        if status == "Одобрено":
+        buttons = [
+            Button[Self](
+                label="Одобрить",
+                emoji="<:approve:1487439505727422674>",
+                style=ButtonStyle.secondary,
+                custom_id=f"forms:{type}:approve",
+                disabled=disable_buttons,
+            ),
+            Button[Self](
+                label="Отклонить",
+                emoji="<:remove:1487439841183535235>",
+                style=ButtonStyle.secondary,
+                custom_id=f"forms:{type}:reject",
+                disabled=disable_buttons,
+            ),
+        ]
+
+        if status == "Одобрено" and type in ("mafia", "ghetto"):
             accent_color = Color.green()
+            buttons.append(
+                Button[Self](
+                    label="Выдать роли",
+                    style=ButtonStyle.secondary,
+                    custom_id=f"forms:{type}:give_roles",
+                )
+            )
+
         elif status == "Отклонено":
             accent_color = Color.red()
 
@@ -83,24 +108,7 @@ class SentFormView(LayoutView):
         container.add_item(TextDisplay(f"```{form_text}```"))
         container.add_item(Separator())
 
-        container.add_item(
-            ActionRow(
-                Button[Self](
-                    label="Одобрить",
-                    emoji="<:approve:1487439505727422674>",
-                    style=ButtonStyle.secondary,
-                    custom_id=f"forms:{type}:approve",
-                    disabled=disable_buttons,
-                ),
-                Button[Self](
-                    label="Отклонить",
-                    emoji="<:remove:1487439841183535235>",
-                    style=ButtonStyle.secondary,
-                    custom_id=f"forms:{type}:reject",
-                    disabled=disable_buttons,
-                ),
-            )
-        )
+        container.add_item(ActionRow(*buttons))
         container.add_item(Separator())
 
         now = datetime.now(UTC)

@@ -5,7 +5,11 @@ from typing import TYPE_CHECKING
 from discord.interactions import Interaction
 
 from .button import handle_forms_button, handle_forms_insert_button
-from .modal import handle_registration_modal_submit, handle_reject_modal_submit
+from .modal import (
+    handle_give_roles_modal_submit,
+    handle_registration_modal_submit,
+    handle_reject_modal_submit,
+)
 
 if TYPE_CHECKING:
     from src.nightcore.bot import NightcoreTools
@@ -33,6 +37,9 @@ async def global_forms_handler(
                     await handle_registration_modal_submit(interaction, type)
                 case "reject":
                     await handle_reject_modal_submit(interaction, type=type)
+                case "give_roles":
+                    await handle_give_roles_modal_submit(interaction)
+
                 case _:
                     return
         case _:
