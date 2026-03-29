@@ -1,5 +1,6 @@
 """Form V2 view component."""
 
+from datetime import UTC, datetime
 from typing import Self, cast
 
 from discord import ButtonStyle, Color, Interaction, Member
@@ -16,6 +17,7 @@ from src.nightcore.features.forms.constants import FORM_TEXT
 from src.nightcore.features.forms.utils.permissions import (
     check_member_permissions,
 )
+from src.nightcore.utils.time import discord_ts
 
 
 class FormView(LayoutView):
@@ -63,6 +65,8 @@ class SentFormView(LayoutView):
         type: str,
         author_id: int,
         status: str = "На рассмотрении",
+        user_answer_id: int | None = None,
+        answer: str | None = None,
         disable_buttons: bool = False,
     ) -> None:
         super().__init__(timeout=None)
@@ -75,18 +79,14 @@ class SentFormView(LayoutView):
             accent_color = Color.green()
         elif status == "Отклонено":
             accent_color = Color.red()
-        # 0
         container = Container[Self](accent_color=accent_color)
-        # 1
         container.add_item(
             TextDisplay(
                 "## Анкета на пост заместителя нелегальных организаций"
             )
-        )  # 2
+        )
         container.add_item(TextDisplay(f"> Автор: <@{author_id}>"))
-        # 3
         container.add_item(Separator())
-        # 4
         container.add_item(TextDisplay(f"```{form_text}```"))
         container.add_item(Separator())
 
@@ -109,7 +109,16 @@ class SentFormView(LayoutView):
             )
         )
         container.add_item(Separator())
-        container.add_item(TextDisplay(f"-# Статус: {status}"))
+
+        now = datetime.now(UTC)
+        if user_answer_id and answer:
+            container.add_item(
+                TextDisplay(
+                    f"### Решение от <@{user_answer_id}> ({discord_ts(now)}):\n```{answer}```"  # noqa: E501
+                )
+            )
+        else:
+            container.add_item(TextDisplay(f"-# Статус: {status}"))
 
         self.add_item(container)
 

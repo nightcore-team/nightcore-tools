@@ -5,7 +5,10 @@ from typing import TYPE_CHECKING, cast
 from discord import Message
 from discord.interactions import Interaction
 
-from src.nightcore.features.forms.components.modal import FormModal
+from src.nightcore.features.forms.components.modal import (
+    FormModal,
+    RejectFormModal,
+)
 from src.nightcore.features.forms.components.view import SentFormView
 from src.nightcore.features.forms.utils.parse import (
     parse_author_id_from_components,
@@ -39,17 +42,7 @@ async def handle_forms_button(
             await interaction.response.edit_message(view=view)
 
         case "reject":
-            form_text = parse_form_text_from_components(message.components)  # type: ignore
-            author_id = parse_author_id_from_components(message.components)  # type: ignore
-
-            view = SentFormView(
-                form_text=form_text,  # type: ignore
-                type=type,
-                author_id=author_id,  # type: ignore
-                status="Отклонено",
-                disable_buttons=True,
-            )
-            await interaction.response.edit_message(view=view)
+            await interaction.response.send_modal(RejectFormModal(type=type))
 
         case _:
             return

@@ -37,7 +37,11 @@ class FormsMessage(Cog):
 
         view = FormView(type=form_type.value)
 
-        await interaction.response.send_message(view=view)
+        await interaction.channel.send(view=view)  # type: ignore
+
+        await interaction.response.send_message(
+            "Сообщение с формами успешно отправлено!", ephemeral=True
+        )
 
 
 async def setup(bot: "NightcoreTools") -> None:
