@@ -23,12 +23,9 @@ async def global_forms_handler(
     match prefix:
         case "forms":
             if action == "insert":
-                await handle_forms_insert_button(interaction, type)
-            match type:
-                case "ghetto" | "mafia":
-                    await handle_forms_button(interaction, type, action)
-                case _:
-                    return
+                return await handle_forms_insert_button(interaction, type)
+
+            await handle_forms_button(interaction, type, action)
 
         case "forms_modal":
             match action:
