@@ -1,4 +1,4 @@
-from .form import FormModal
+from .form import InsertFormModal
 from .reject import RejectFormModal
 
-__all__ = ("FormModal", "RejectFormModal")
+__all__ = ("InsertFormModal", "RejectFormModal")

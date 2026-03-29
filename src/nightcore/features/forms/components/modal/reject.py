@@ -6,7 +6,7 @@ from discord import TextStyle
 from discord.ui import Modal, TextInput
 
 
-class RejectFormModal(Modal, title="Отклонение анкеты"):
+class RejectFormModal(Modal, title="Отклонение формы"):
     def __init__(self, type: str) -> None:
         super().__init__(custom_id=f"forms_modal:{type}:reject")
 
@@ -15,7 +15,7 @@ class RejectFormModal(Modal, title="Отклонение анкеты"):
     reason = TextInput[Self](
         label="Причина отклонения",
         style=TextStyle.paragraph,
-        placeholder="Введите причину отклонения анкеты.",
+        placeholder="Введите причину отклонения формы.",
         required=True,
         max_length=100,
     )

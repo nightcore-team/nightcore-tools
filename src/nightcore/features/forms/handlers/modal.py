@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING, cast
 from discord.interactions import Interaction
 
 from src.nightcore.features.forms.components.view import SentFormView
+from src.nightcore.features.forms.constants import TITLE_DICTIONARY
 from src.nightcore.features.forms.utils.parse import (
     parse_author_id_from_components,
     parse_form_text_from_components,
@@ -28,7 +29,12 @@ async def handle_registration_modal_submit(
     )
 
     await interaction.followup.send(
-        view=SentFormView(form, type=type, author_id=interaction.user.id)
+        view=SentFormView(
+            title=TITLE_DICTIONARY.get(type, "Анкета"),
+            form_text=form,
+            type=type,
+            author_id=interaction.user.id,
+        )
     )
 
 
@@ -45,13 +51,21 @@ async def handle_reject_modal_submit(
         interaction.data["components"][0]["components"][0]["value"],  # type: ignore
     )
 
-    form_text = parse_form_text_from_components(interaction.message.components)  # type: ignore
-    author_id = parse_author_id_from_components(interaction.message.components)  # type: ignore
+    title = TITLE_DICTIONARY.get(type, "Анкета")
+    form_text = cast(
+        str,
+        parse_form_text_from_components(interaction.message.components),  # type: ignore
+    )
+    author_id = cast(
+        int,
+        parse_author_id_from_components(interaction.message.components),  # type: ignore
+    )
 
     view = SentFormView(
-        form_text=form_text,  # type: ignore
+        title=title,
+        form_text=form_text,
         type=type,
-        author_id=author_id,  # type: ignore
+        author_id=author_id,
         answer=reason,
         user_answer_id=interaction.user.id,
         status="Отклонено",

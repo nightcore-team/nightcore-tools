@@ -6,13 +6,14 @@ from discord import Message
 from discord.interactions import Interaction
 
 from src.nightcore.features.forms.components.modal import (
-    FormModal,
+    InsertFormModal,
     RejectFormModal,
 )
 from src.nightcore.features.forms.components.view import SentFormView
 from src.nightcore.features.forms.utils.parse import (
     parse_author_id_from_components,
     parse_form_text_from_components,
+    parse_form_title_from_components,
 )
 
 if TYPE_CHECKING:
@@ -28,13 +29,25 @@ async def handle_forms_button(
 
     match action:
         case "approve":
-            form_text = parse_form_text_from_components(message.components)
-            author_id = parse_author_id_from_components(message.components)
+            title = cast(
+                str,
+                (
+                    parse_form_title_from_components(message.components)
+                    or "Анкета"
+                ),
+            )
+            form_text = cast(
+                str, parse_form_text_from_components(message.components)
+            )
+            author_id = cast(
+                int, parse_author_id_from_components(message.components)
+            )
 
             view = SentFormView(
-                form_text=form_text,  # type: ignore
+                title=title,
+                form_text=form_text,
                 type=type,
-                author_id=author_id,  # type: ignore
+                author_id=author_id,
                 status="Одобрено",
                 disable_buttons=True,
             )
@@ -53,4 +66,4 @@ async def handle_forms_insert_button(
 ) -> None:
     """Handle forms insert button interaction."""
 
-    await interaction.response.send_modal(FormModal(type=type))
+    await interaction.response.send_modal(InsertFormModal(type=type))

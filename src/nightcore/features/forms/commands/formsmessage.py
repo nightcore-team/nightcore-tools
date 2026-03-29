@@ -7,6 +7,10 @@ from discord.ext.commands import Cog  # type: ignore
 from discord.interactions import Interaction
 
 from src.nightcore.features.forms.components.view import FormView
+from src.nightcore.features.forms.constants import (
+    TEXT_DICTIONARY,
+    TITLE_DICTIONARY,
+)
 
 if TYPE_CHECKING:
     from src.nightcore.bot import NightcoreTools
@@ -22,8 +26,10 @@ class FormsMessage(Cog):
     )
     @app_commands.choices(
         form_type=[
-            app_commands.Choice(name="Мафия", value="mafia"),
-            app_commands.Choice(name="Гетто", value="ghetto"),
+            app_commands.Choice(name="Анкеты (Мафия)", value="mafia"),
+            app_commands.Choice(name="Анкеты (Гетто)", value="ghetto"),
+            app_commands.Choice(name="Бизнесы (Мафия)", value="business"),
+            app_commands.Choice(name="Территории (Мафия)", value="territory"),
         ],
     )
     @app_commands.rename(form_type="тип")
@@ -35,7 +41,11 @@ class FormsMessage(Cog):
     ) -> None:
         """Sends the forms message in the current channel."""
 
-        view = FormView(type=form_type.value)
+        view = FormView(
+            type=form_type.value,
+            title=TITLE_DICTIONARY.get(form_type.value, "Анкета"),
+            text=TEXT_DICTIONARY.get(form_type.value, "Форма не найдена."),
+        )
 
         await interaction.channel.send(view=view)  # type: ignore
 

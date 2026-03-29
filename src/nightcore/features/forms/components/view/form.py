@@ -13,7 +13,6 @@ from discord.ui import (
     TextDisplay,
 )
 
-from src.nightcore.features.forms.constants import FORM_TEXT
 from src.nightcore.features.forms.utils.permissions import (
     check_member_permissions,
 )
@@ -21,26 +20,22 @@ from src.nightcore.utils.time import discord_ts
 
 
 class FormView(LayoutView):
-    def __init__(self, type: str) -> None:
+    def __init__(self, type: str, title: str, text: str) -> None:
         super().__init__(timeout=None)
 
         """Build the form view layout."""
 
         container = Container[Self]()
 
-        container.add_item(
-            TextDisplay(
-                "## Анкета на пост заместителя нелегальных организаций"
-            )
-        )
+        container.add_item(TextDisplay(f"## {title}"))
         container.add_item(Separator())
 
         container.add_item(
-            TextDisplay(f"### Форма для заполнения:\n```{FORM_TEXT}```")
+            TextDisplay(f"### Форма для заполнения:\n```{text}```")
         )
         container.add_item(
             TextDisplay(
-                "-# Нажмите на кнопку ниже, чтобы вставить заполненную анкету."
+                "-# Нажмите на кнопку ниже, чтобы вставить заполненную форму."
             )
         )
         container.add_item(Separator())
@@ -48,7 +43,7 @@ class FormView(LayoutView):
         container.add_item(
             ActionRow(
                 Button[Self](
-                    label="Вставить анкету",
+                    label="Вставить форму",
                     style=ButtonStyle.secondary,
                     custom_id=f"forms:{type}:insert",
                 )
@@ -61,6 +56,7 @@ class FormView(LayoutView):
 class SentFormView(LayoutView):
     def __init__(
         self,
+        title: str,
         form_text: str,
         type: str,
         author_id: int,
@@ -79,12 +75,9 @@ class SentFormView(LayoutView):
             accent_color = Color.green()
         elif status == "Отклонено":
             accent_color = Color.red()
+
         container = Container[Self](accent_color=accent_color)
-        container.add_item(
-            TextDisplay(
-                "## Анкета на пост заместителя нелегальных организаций"
-            )
-        )
+        container.add_item(TextDisplay(f"## {title}"))
         container.add_item(TextDisplay(f"> Автор: <@{author_id}>"))
         container.add_item(Separator())
         container.add_item(TextDisplay(f"```{form_text}```"))
