@@ -30,13 +30,3 @@ def parse_author_id_from_components(components: list[Component]):  # type: ignor
                     return int(match.group(1))
 
     return None
-
-
-def parse_form_title_from_components(components: list[Component]):  # type: ignore
-    """Extracts the form title from a list of components."""
-    for component in components:
-        for item in component.children:  # type: ignore
-            if item.id == 2:  # type: ignore
-                return item.content  # type: ignore
-
-    return None

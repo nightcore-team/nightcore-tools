@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING, cast
 from discord import Message
 from discord.interactions import Interaction
 
+from nightcore.features.forms.constants import TITLE_DICTIONARY
 from src.nightcore.features.forms.components.modal import (
     InsertFormModal,
     RejectFormModal,
@@ -13,7 +14,6 @@ from src.nightcore.features.forms.components.view import SentFormView
 from src.nightcore.features.forms.utils.parse import (
     parse_author_id_from_components,
     parse_form_text_from_components,
-    parse_form_title_from_components,
 )
 
 if TYPE_CHECKING:
@@ -29,13 +29,7 @@ async def handle_forms_button(
 
     match action:
         case "approve":
-            title = cast(
-                str,
-                (
-                    parse_form_title_from_components(message.components)
-                    or "Анкета"
-                ),
-            )
+            title = TITLE_DICTIONARY.get(type, "Анкета")
             form_text = cast(
                 str, parse_form_text_from_components(message.components)
             )
