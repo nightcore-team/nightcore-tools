@@ -7,13 +7,17 @@ from discord.interactions import Interaction
 
 from src.nightcore.features.forms.components.modal import FormModal
 from src.nightcore.features.forms.components.view import SentFormView
+from src.nightcore.features.forms.utils.parse import (
+    parse_author_id_from_components,
+    parse_form_text_from_components,
+)
 
 if TYPE_CHECKING:
     from src.nightcore.bot import NightcoreTools
 
 
 async def handle_forms_button(
-    interaction: Interaction["NightcoreTools"], action: str
+    interaction: Interaction["NightcoreTools"], type: str, action: str
 ) -> None:
     """Handle forms button interaction."""
 
@@ -21,28 +25,31 @@ async def handle_forms_button(
 
     match action:
         case "approve":
-            view = cast(SentFormView, SentFormView.from_message(message))
-            _view = SentFormView(
-                form_text=view.form_text,  # type: ignore
-                type=view.type,  # type: ignore
+            form_text = parse_form_text_from_components(message.components)
+            author_id = parse_author_id_from_components(message.components)
+
+            view = SentFormView(
+                form_text=form_text,  # type: ignore
+                type=type,
+                author_id=author_id,  # type: ignore
                 status="Одобрено",
                 disable_buttons=True,
-                author_id=view.author_id,  # type: ignore
             )
 
-            await interaction.response.edit_message(view=_view)
+            await interaction.response.edit_message(view=view)
 
         case "reject":
-            view = cast(SentFormView, SentFormView.from_message(message))
-            _view = SentFormView(
-                form_text=view.form_text,  # type: ignore
-                type=view.type,  # type: ignore
+            form_text = parse_form_text_from_components(message.components)  # type: ignore
+            author_id = parse_author_id_from_components(message.components)  # type: ignore
+
+            view = SentFormView(
+                form_text=form_text,  # type: ignore
+                type=type,
+                author_id=author_id,  # type: ignore
                 status="Отклонено",
                 disable_buttons=True,
-                author_id=view.author_id,  # type: ignore
             )
-
-            await interaction.response.edit_message(view=_view)
+            await interaction.response.edit_message(view=view)
 
         case _:
             return

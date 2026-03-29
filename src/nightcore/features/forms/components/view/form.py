@@ -75,17 +75,18 @@ class SentFormView(LayoutView):
             accent_color = Color.green()
         elif status == "Отклонено":
             accent_color = Color.red()
-
+        # 0
         container = Container[Self](accent_color=accent_color)
-
+        # 1
         container.add_item(
             TextDisplay(
                 "## Анкета на пост заместителя нелегальных организаций"
             )
-        )
+        )  # 2
         container.add_item(TextDisplay(f"> Автор: <@{author_id}>"))
+        # 3
         container.add_item(Separator())
-
+        # 4
         container.add_item(TextDisplay(f"```{form_text}```"))
         container.add_item(Separator())
 
