@@ -35,8 +35,10 @@ class GiveRolesFormModal(Modal, title="Выдача ролей"):
                     placeholder="Выберите организацию",
                     required=True,
                     options=[
-                        SelectOption(label=key, value=value)
-                        for key, value in orgs
+                        SelectOption(
+                            label=i["name"], value=i["deputy_role_id"]
+                        )
+                        for i in orgs
                     ],
                 ),
             )
