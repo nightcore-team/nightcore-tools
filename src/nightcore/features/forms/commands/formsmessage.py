@@ -29,7 +29,7 @@ class FormsMessage(Cog):
             app_commands.Choice(name="Анкеты (Мафия)", value="mafia"),
             app_commands.Choice(name="Анкеты (Гетто)", value="ghetto"),
             app_commands.Choice(name="Бизнесы (Мафия)", value="business"),
-            app_commands.Choice(name="Территории (Мафия)", value="territory"),
+            app_commands.Choice(name="Территории (Гетто)", value="territory"),
         ],
     )
     @app_commands.rename(form_type="тип")
