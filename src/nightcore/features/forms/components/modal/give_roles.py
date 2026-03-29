@@ -3,7 +3,7 @@
 from typing import Self
 
 from discord import SelectOption, TextStyle
-from discord.ui import Modal, Select, TextInput
+from discord.ui import Label, Modal, Select, TextInput
 
 from src.nightcore.features.forms.utils.organizations import (
     get_organizations_dicts,
@@ -29,11 +29,15 @@ class GiveRolesFormModal(Modal, title="Выдача ролей"):
         )
 
         self.add_item(
-            Select[Self](
-                placeholder="Выберите организацию",
-                required=True,
-                options=[
-                    SelectOption(label=key, value=value) for key, value in orgs
-                ],
+            Label(
+                text="Выберите организацию:",
+                component=Select[Self](
+                    placeholder="Выберите организацию",
+                    required=True,
+                    options=[
+                        SelectOption(label=key, value=value)
+                        for key, value in orgs
+                    ],
+                ),
             )
         )

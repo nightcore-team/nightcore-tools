@@ -7,7 +7,7 @@ requires-python = ">=3.13"
 
 dependencies = [
     "colorlog>=6.10.1",
-    "discord-py",
+    "discord-py>=2.7.1",
     "psutil>=7.2.2",
     "pydantic>=2.12.5",
     "pydantic-settings>=2.12.0",
@@ -15,9 +15,6 @@ dependencies = [
 
 [dependency-groups]
 dev = ["ruff>=0.12.7"]
-
-[tool.uv.sources]
-discord-py = { git = "https://github.com/Rapptz/discord.py.git" }
 
 # ================================= RUFF
 [tool.ruff]
