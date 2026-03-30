@@ -97,7 +97,7 @@ async def handle_give_roles_modal_submit(
     )
     organization_id = cast(
         int,
-        int(interaction.data["components"][1]["components"][0]["value"]),  # type: ignore
+        int(interaction.data["components"][1]["component"]["values"][0]),  # type: ignore
     )
 
     member = await ensure_member_exists(guild, user_id)
