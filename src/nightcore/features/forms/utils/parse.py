@@ -13,7 +13,7 @@ def parse_form_text_from_components(components: list[Component]):  # type: ignor
     for container in components:
         for item in container.children:  # type: ignore
             if item.id == 5:  # type: ignore
-                match = re.search(r"```([\s\S]*?)```", item.content)  # type: ignore
+                match = re.search(r"([\s\S]*?)", item.content)  # type: ignore
                 if match:
                     return match.group(1)
 

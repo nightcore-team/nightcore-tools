@@ -105,7 +105,7 @@ class SentFormView(LayoutView):
         container.add_item(TextDisplay(f"## {title}"))
         container.add_item(TextDisplay(f"> Автор: <@{author_id}>"))
         container.add_item(Separator())
-        container.add_item(TextDisplay(f"```{form_text}```"))
+        container.add_item(TextDisplay(f"{form_text}"))
         container.add_item(Separator())
 
         container.add_item(ActionRow(*buttons))
