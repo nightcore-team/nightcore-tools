@@ -2,20 +2,23 @@
 
 import logging
 import re
+from typing import cast
 
 from discord import Component
 
 logger = logging.getLogger(__name__)
 
 
-def parse_form_text_from_components(components: list[Component]):  # type: ignore
+def parse_form_text_from_components(
+    components: list[Component],
+) -> str | None:  # type: ignore
     """Extracts the form text from a list of components."""
     for container in components:
         for item in container.children:  # type: ignore
             if item.id == 5:  # type: ignore
-                match = re.search(r"([\s\S]*?)", item.content)  # type: ignore
-                if match:
-                    return match.group(1)
+                content = cast(str | None, item.content)  # type: ignore
+                if content:
+                    return content
 
     return None
 
