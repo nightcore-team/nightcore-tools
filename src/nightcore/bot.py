@@ -6,6 +6,7 @@ import time
 from datetime import UTC, datetime
 
 import discord
+import discordhealthcheck  # type: ignore
 from aiohttp import TCPConnector
 from discord import app_commands
 from discord.ext.commands import Bot  # type: ignore
@@ -135,6 +136,9 @@ class NightcoreTools(Bot):
     async def setup_hook(self):
         """Setup hook called when the bot is ready to start."""
         logger.info("Setup hook started...")
+
+        logger.info("Running discord health check...")
+        self.healthcheck_server = await discordhealthcheck.start(self)
 
         await self.load_extensions()
 
