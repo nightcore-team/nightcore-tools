@@ -1,0 +1,16 @@
+name: nightcore-tools
+
+services:
+  nightcore-tools-bot:
+    image: nightcore-tools-bot:latest
+    container_name: nightcore-tools-bot
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: no
+    env_file:
+      - .env
+
+    volumes:
+      - ./src/:/app/src/
+      - ./main.py:/app/main.py
