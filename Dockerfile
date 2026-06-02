@@ -45,6 +45,6 @@ RUN rm -rf /app/.venv/share/man \
     && chmod +x ./docker/*
 
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
-    CMD [ "discordhealthcheck" ] || exit 1
+    CMD [ "discordhealthcheck", "--port 40405"] || exit 1
 
 CMD ["sh", "./docker/docker-entrypoint.sh"]
