@@ -6,8 +6,9 @@ import time
 from datetime import UTC, datetime
 
 import discord
+import discordhealthcheck  # type: ignore
 from aiohttp import TCPConnector
-from discord import app_commands
+from discord import MemberCacheFlags, app_commands
 from discord.ext.commands import Bot  # type: ignore
 
 from src.config._global import config
@@ -43,12 +44,16 @@ class NightcoreTools(Bot):
     ):
         self.cog_modules = cog_modules
 
+        member_cache_flags = MemberCacheFlags.none()
+
         super().__init__(
             command_prefix=".",
             intents=discord.Intents.all(),
             help_command=None,
             tree_cls=GuildOnlyTree,
+            member_cache_flags=member_cache_flags,
         )
+
         self.startup_time: datetime = datetime.now(UTC)
 
     @property
@@ -135,6 +140,9 @@ class NightcoreTools(Bot):
     async def setup_hook(self):
         """Setup hook called when the bot is ready to start."""
         logger.info("Setup hook started...")
+
+        logger.info("[healthcheck] Running discord health check...")
+        self.healthcheck_server = await discordhealthcheck.start(self)
 
         await self.load_extensions()
 

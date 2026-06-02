@@ -24,6 +24,7 @@ from src.nightcore.features.ga.constants import (
     CHIEF_ADMINISTRATOR_CHANNEL_NAME,
     CHIEF_ADMINISTRATOR_ID,
 )
+from src.nightcore.utils.object import ensure_role_exists
 
 logger = logging.getLogger(__name__)
 
@@ -109,9 +110,9 @@ class GA(Cog):
         channel = cast(VoiceChannel, channel)
 
         administrator_roles = [
-            cast(Role, guild.get_role(role_id))
+            role
             for role_id in ADMINISTRATOR_ROLES_IDS
-            if guild.get_role(role_id) is not None
+            if (role := await ensure_role_exists(guild, role_id)) is not None
         ]
 
         channel_permissions = channel.overwrites
